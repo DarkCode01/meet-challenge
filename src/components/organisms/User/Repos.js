@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import {
   Table,
   Thead,
@@ -10,29 +11,23 @@ import {
   TableCaption,
   Text,
   useDisclosure,
-  Skeleton
 } from '@chakra-ui/react';
 import RepoDetails from 'components/organisms/User/RepoDetails';
+import Loading from 'components/organisms/UI/Loading';
 
-export default function Repos({ isLoading, repos }) {
-  const { isOpen, onClose, onOpen} = useDisclosure();
+function Repos({ isLoading, repos }) {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const [selected, setSelected] = useState({});
-  const data = !isLoading ? repos : [{}, {}, {}, {}];
 
   const select = (repo) => () => {
     setSelected(repo);
     onOpen();
-  }
+  };
 
   return (
     <Table variant="simple">
-
       {/* Modal */}
-      <RepoDetails
-        repo={selected}
-        onClose={onClose}
-        isOpen={isOpen}
-      />
+      <RepoDetails repo={selected} onClose={onClose} isOpen={isOpen} />
 
       <TableCaption>Imperial to metric conversion factors</TableCaption>
       <Thead>
@@ -42,22 +37,18 @@ export default function Repos({ isLoading, repos }) {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((repo, index) => (
+        {repos.map((repo, index) => (
           <Tr key={`repo-user-${index}`}>
             <Td>
-              <Skeleton isLoaded={!isLoading}>
-                <Text cursor="pointer" onClick={select(repo)}>
-                  {repo.name}
-                </Text>
-              </Skeleton>
+              <Text cursor="pointer" onClick={select(repo)}>
+                {repo.name}
+              </Text>
             </Td>
-            <Td>
-              <Skeleton isLoaded={!isLoading}>
-                {repo.forks}
-              </Skeleton>
-            </Td>
+            <Td>{repo.forks}</Td>
           </Tr>
         ))}
+
+        <Loading isLoading={isLoading} />
       </Tbody>
       <Tfoot>
         <Tr>
@@ -68,3 +59,15 @@ export default function Repos({ isLoading, repos }) {
     </Table>
   );
 }
+
+Repos.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  repos: propTypes.arrayOf(
+    propTypes.objectOf({
+      name: propTypes.string,
+      forks: propTypes.number,
+    })
+  ),
+};
+
+export default Repos;

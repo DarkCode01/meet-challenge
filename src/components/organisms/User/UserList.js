@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Table,
@@ -9,13 +10,10 @@ import {
   Th,
   Td,
   Image,
-  SkeletonCircle,
-  SkeletonText
 } from '@chakra-ui/react';
+import Loading from 'components/organisms/UI/Loading';
 
-export default function UserList({ isLoading, users }) {
-  const data = !isLoading ? users : [{}, {}, {}, {}];
-
+function UserList({ isLoading, users }) {
   return (
     <Table variant="simple">
       <Thead>
@@ -25,23 +23,19 @@ export default function UserList({ isLoading, users }) {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((user, index) => (
-          <Tr key={`user-${index}`}>
+        {users.map((user, index) => (
+          <Tr key={`user-${index}`} id={`user-${index}`}>
             <Td>
-              <SkeletonCircle isLoaded={!isLoading} boxSize="150px">
-                <Image
-                  borderRadius="full"
-                  boxSize="150px"
-                  src={user.avatar_url}
-                  alt={user.login}
-                  fallbackSrc="https://via.placeholder.com/150"
-                />
-              </SkeletonCircle>
+              <Image
+                borderRadius="full"
+                boxSize="150px"
+                src={user.avatar_url}
+                alt={user.login}
+                fallbackSrc="https://via.placeholder.com/150"
+              />
             </Td>
             <Td>
-              <SkeletonText isLoaded={!isLoading}>
-                <Link to={`/${user.login}`}>{user.login}</Link>
-              </SkeletonText>
+              <Link to={`/${user.login}`}>{user.login}</Link>
             </Td>
           </Tr>
         ))}
@@ -52,6 +46,21 @@ export default function UserList({ isLoading, users }) {
           <Th>Username</Th>
         </Tr>
       </Tfoot>
+
+      {/* loading */}
+      <Loading isLoading={isLoading} />
     </Table>
   );
 }
+
+UserList.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  users: propTypes.arrayOf(
+    propTypes.objectOf({
+      avatar_url: propTypes.string,
+      login: propTypes.string,
+    })
+  ),
+};
+
+export default UserList;

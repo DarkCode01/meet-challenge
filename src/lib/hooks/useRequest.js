@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
 import request from 'lib/utils/request';
 
+/**
+ * useRequest - hook to make request to api rest.
+ *
+ * @param {function} action - request function.
+ * @param {object} options - optiosn params and default value of request.
+ */
 export const useRequest = ({ action, options }) => {
+  const [isConcat, setConcat] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [data, setData] = useState(options.defaultData || {});
+  const [data, setData] = useState(options.defaultData || { items: [] });
 
   // handler error
   const toggleError = (error) => setError(error);
@@ -16,7 +23,21 @@ export const useRequest = ({ action, options }) => {
           try {
             const response = await action(options);
 
-            setData(response.data);
+            if (isConcat) {
+              setData((prev) => {
+                if (Array.isArray(response.data)) {
+                  return prev.concat(response.data);
+                }
+
+                return {
+                  items: prev.items.concat(response.data.items),
+                };
+              });
+
+              setConcat(false);
+            } else {
+              setData(response.data);
+            }
           } catch (err) {
             toggleError(err.response?.data?.message || 'Error interno!.');
           }
@@ -29,7 +50,9 @@ export const useRequest = ({ action, options }) => {
     };
 
     fetch();
-  }, [options.per_page]);
 
-  return { isLoading, error, data, toggleError };
+    // eslint-disable-next-line
+  }, [options.per_page, options.page, options.order, options.q]);
+
+  return { isLoading, error, data, setData, toggleError, setConcat };
 };

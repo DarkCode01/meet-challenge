@@ -1,5 +1,4 @@
-import React from 'react';
-// import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -19,9 +18,14 @@ import { github } from 'lib/services/api';
 import { useRequest } from 'lib/hooks/useRequest';
 import { useFocusError } from 'lib/hooks/useFocusError';
 import { useParams } from 'react-router-dom';
+import { useIfinityScroll } from 'lib/hooks/useInfinityScroll';
 
 export default function User() {
   const { username } = useParams();
+  const [page, setPage] = useState(1);
+
+  // rquest and hooks
+  const { isBottom, setIsBottom } = useIfinityScroll();
   const userRequest = useRequest({
     action: github.getUser,
     options: { username },
@@ -30,15 +34,26 @@ export default function User() {
     action: github.getUserRepositories,
     options: {
       username,
-      defaultData: []
+      page,
+      defaultData: [],
     },
   });
 
   useFocusError('error-notifiaciton', [userRequest.error, reposRequest.error]);
 
+  useEffect(() => {
+    if (isBottom === true) {
+      reposRequest.setConcat(true);
+      setPage((prev) => prev + 1);
+      setIsBottom(false);
+    }
+
+    // eslint-disable-next-line
+  }, [isBottom]);
+
   return (
     <ChakraProvider theme={theme}>
-      <Navbar title="test" />
+      <Navbar title="Hub Clone" />
 
       <ErrorNotificaiton
         isOpen={userRequest.error || reposRequest.error}
@@ -57,7 +72,7 @@ export default function User() {
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">@{ username }</BreadcrumbLink>
+              <BreadcrumbLink href="#">@{username}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -66,7 +81,6 @@ export default function User() {
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(5, 1fr)"
           gap={4}
-          // minH="100vh"
           p={3}
         >
           <GridItem colSpan={1} rowSpan={2}>
@@ -75,17 +89,7 @@ export default function User() {
               user={userRequest.data || {}}
             />
           </GridItem>
-          {/* <GridItem
-            colSpan={4}
-            // maxH="100vh"
-          >
-            <Filter />
-          </GridItem> */}
-          <GridItem
-            colSpan={4}
-            // maxH="100vh"
-          >
-            {/* / <Filter /\\> */}
+          <GridItem colSpan={4}>
             <Repos
               isLoading={reposRequest.isLoading}
               repos={reposRequest.data || []}

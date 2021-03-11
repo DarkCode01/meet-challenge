@@ -1,19 +1,10 @@
 import React from 'react';
-import {
-  Image,
-  Box,
-  Skeleton,
-} from '@chakra-ui/react';
-// import { StarIcon } from '@chakra-ui/icons';
+import propTypes from 'prop-types';
+import { Image, Box, Skeleton } from '@chakra-ui/react';
 
-export default function Details({ isLoading, user }) {
+function Details({ isLoading, user }) {
   return (
-    <Box
-      // maxW="sm"
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-    >
+    <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Skeleton isLoaded={!isLoading}>
         <Image src={user.avatar_url} alt={user.login} />
       </Skeleton>
@@ -26,15 +17,11 @@ export default function Details({ isLoading, user }) {
           lineHeight="tight"
           isTruncated
         >
-          <Skeleton isLoaded={!isLoading}>
-            {user.name}
-          </Skeleton>
+          <Skeleton isLoaded={!isLoading}>{user.name}</Skeleton>
         </Box>
 
         <Box>
-          <Skeleton isLoaded={!isLoading}>
-            @{user.login}
-          </Skeleton>
+          <Skeleton isLoaded={!isLoading}>@{user.login}</Skeleton>
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
@@ -53,3 +40,16 @@ export default function Details({ isLoading, user }) {
     </Box>
   );
 }
+
+Details.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  user: propTypes.objectOf({
+    avatar_url: propTypes.string,
+    login: propTypes.string,
+    name: propTypes.string,
+    followers: propTypes.number,
+    following: propTypes.number,
+  }),
+};
+
+export default Details;
