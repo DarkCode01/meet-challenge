@@ -20,21 +20,27 @@ export default function User() {
       <Box textAlign="center" fontSize="xl">
         {/* <Heading>All users</Heading> */}
         <Grid
-          // h="200px"
+          h="200px"
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(5, 1fr)"
           gap={4}
-          minH="100vh"
+          // minH="100vh"
           p={3}
         >
-          <GridItem colSpan={1}>
+          <GridItem colSpan={1} rowSpan={2}>
             <Details />
           </GridItem>
-          <GridItem
-            rowSpan={2}
+          {/* <GridItem
             colSpan={4}
-            maxH="100vh"
+            // maxH="100vh"
           >
+            <Filter />
+          </GridItem> */}
+          <GridItem
+            colSpan={4}
+            // maxH="100vh"
+          >
+           {/* / <Filter /> */}
             <UserList />
           </GridItem>
         </Grid>
