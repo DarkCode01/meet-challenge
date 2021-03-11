@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from 'ColorModeSwitcher';
-import { Box, Text, Stack, FormControl, Input } from '@chakra-ui/react';
+import { Box, Text, Stack } from '@chakra-ui/react';
 
 export const MenuToggle = ({ toggle, isOpen }) => {
   return (
@@ -34,9 +34,6 @@ export const Menu = ({ isOpen }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        <FormControl id="first-name" isRequired>
-          <Input placeholder="Nombre del repositorio" />
-        </FormControl>
         <MenuItem to="#">
           <ColorModeSwitcher />
         </MenuItem>

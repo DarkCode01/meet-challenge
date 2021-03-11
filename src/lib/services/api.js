@@ -9,15 +9,17 @@ const instance = axios.create({
 });
 
 export const github = {
-  getUsers: async ({ page, per_page }) => {
-    return await instance.get('/users', {
-      params: { per_page, page },
+  getUsers: async ({ q, order, page, per_page }) => {
+    return await instance.get('/search/users', {
+      params: { per_page, page, order, q },
     });
   },
   getUser: async ({ username }) => {
     return await instance.get(`/users/${username}`);
   },
-  getUserRepositories: async ({ username }) => {
-    return await instance.get(`/users/${username}/repos`);
+  getUserRepositories: async ({ page, username }) => {
+    return await instance.get(`/users/${username}/repos`, {
+      params: { page }
+    });
   },
 };

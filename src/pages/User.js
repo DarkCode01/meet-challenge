@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useParams } from 'react-router-dom';
 import {
   ChakraProvider,
@@ -19,9 +19,11 @@ import { github } from 'lib/services/api';
 import { useRequest } from 'lib/hooks/useRequest';
 import { useFocusError } from 'lib/hooks/useFocusError';
 import { useParams } from 'react-router-dom';
+import { useIfinityScroll } from 'lib/hooks/useInfinityScroll';
 
 export default function User() {
   const { username } = useParams();
+  const [page, setPage] = useState(1);
   const userRequest = useRequest({
     action: github.getUser,
     options: { username },
@@ -30,11 +32,22 @@ export default function User() {
     action: github.getUserRepositories,
     options: {
       username,
+      page,
       defaultData: []
     },
   });
 
   useFocusError('error-notifiaciton', [userRequest.error, reposRequest.error]);
+
+  const { isBottom, setIsBottom } = useIfinityScroll();
+
+  useEffect(() => {
+    if (isBottom === true) {
+      reposRequest.setConcat(true);
+      setPage(prev => prev + 1);
+      setIsBottom(false);
+    }
+  }, [isBottom]);
 
   return (
     <ChakraProvider theme={theme}>

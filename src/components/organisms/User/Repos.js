@@ -3,6 +3,7 @@ import {
   Table,
   Thead,
   Tbody,
+  Center,
   Tfoot,
   Tr,
   Th,
@@ -10,14 +11,14 @@ import {
   TableCaption,
   Text,
   useDisclosure,
-  Skeleton
+  Spinner,
+  ScaleFade
 } from '@chakra-ui/react';
 import RepoDetails from 'components/organisms/User/RepoDetails';
 
 export default function Repos({ isLoading, repos }) {
   const { isOpen, onClose, onOpen} = useDisclosure();
   const [selected, setSelected] = useState({});
-  const data = !isLoading ? repos : [{}, {}, {}, {}];
 
   const select = (repo) => () => {
     setSelected(repo);
@@ -42,22 +43,32 @@ export default function Repos({ isLoading, repos }) {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((repo, index) => (
+        {repos.map((repo, index) => (
           <Tr key={`repo-user-${index}`}>
             <Td>
-              <Skeleton isLoaded={!isLoading}>
-                <Text cursor="pointer" onClick={select(repo)}>
-                  {repo.name}
-                </Text>
-              </Skeleton>
+              <Text cursor="pointer" onClick={select(repo)}>
+                {repo.name}
+              </Text>
             </Td>
-            <Td>
-              <Skeleton isLoaded={!isLoading}>
-                {repo.forks}
-              </Skeleton>
-            </Td>
+            <Td>{repo.forks}</Td>
           </Tr>
         ))}
+        <ScaleFade
+          id="error-notifiaciton"
+          in={isLoading}
+          unmountOnExit={true}
+        >
+          <Center>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+            Cargando...
+          </Center>
+        </ScaleFade>
       </Tbody>
       <Tfoot>
         <Tr>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Table,
+  Spinner,
   Thead,
   Tbody,
   Tfoot,
@@ -9,13 +10,11 @@ import {
   Th,
   Td,
   Image,
-  SkeletonCircle,
-  SkeletonText
+  ScaleFade,
+  Center
 } from '@chakra-ui/react';
 
 export default function UserList({ isLoading, users }) {
-  const data = !isLoading ? users : [{}, {}, {}, {}];
-
   return (
     <Table variant="simple">
       <Thead>
@@ -25,23 +24,19 @@ export default function UserList({ isLoading, users }) {
         </Tr>
       </Thead>
       <Tbody>
-        {data.map((user, index) => (
-          <Tr key={`user-${index}`}>
+        {users.map((user, index) => (
+          <Tr key={`user-${index}`} id={`user-${index}`}>
             <Td>
-              <SkeletonCircle isLoaded={!isLoading} boxSize="150px">
-                <Image
-                  borderRadius="full"
-                  boxSize="150px"
-                  src={user.avatar_url}
-                  alt={user.login}
-                  fallbackSrc="https://via.placeholder.com/150"
-                />
-              </SkeletonCircle>
+              <Image
+                borderRadius="full"
+                boxSize="150px"
+                src={user.avatar_url}
+                alt={user.login}
+                fallbackSrc="https://via.placeholder.com/150"
+              />
             </Td>
             <Td>
-              <SkeletonText isLoaded={!isLoading}>
-                <Link to={`/${user.login}`}>{user.login}</Link>
-              </SkeletonText>
+              <Link to={`/${user.login}`}>{user.login}</Link>
             </Td>
           </Tr>
         ))}
@@ -52,6 +47,22 @@ export default function UserList({ isLoading, users }) {
           <Th>Username</Th>
         </Tr>
       </Tfoot>
+      <ScaleFade
+          id="error-notifiaciton"
+          in={isLoading}
+          unmountOnExit={true}
+        >
+          <Center>
+            <Spinner
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="xl"
+            />
+            Cargando....
+          </Center>
+        </ScaleFade>
     </Table>
   );
 }
