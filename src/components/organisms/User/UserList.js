@@ -9,7 +9,7 @@ import {
   Th,
   Td,
   TableCaption,
-  Image
+  Image,
 } from '@chakra-ui/react';
 
 export default function UserList({ users }) {
@@ -23,7 +23,7 @@ export default function UserList({ users }) {
         </Tr>
       </Thead>
       <Tbody>
-        { users.map(user => (
+        {users.map((user) => (
           <Tr key={user.login}>
             <Td>
               <Image
@@ -34,10 +34,11 @@ export default function UserList({ users }) {
                 fallbackSrc="https://via.placeholder.com/150"
               />
             </Td>
-            <Td><Link to={`/${user.login}`}>{ user.login }</Link></Td>
+            <Td>
+              <Link to={`/${user.login}`}>{user.login}</Link>
+            </Td>
           </Tr>
-          ))
-        }
+        ))}
       </Tbody>
       <Tfoot>
         <Tr>
@@ -47,4 +48,4 @@ export default function UserList({ users }) {
       </Tfoot>
     </Table>
   );
-};
+}

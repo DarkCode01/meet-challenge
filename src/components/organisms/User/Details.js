@@ -12,7 +12,6 @@ import {
 // import { StarIcon } from '@chakra-ui/icons';
 
 export default function Details({ user }) {
-  
   return (
     <Box
       // maxW="sm"
@@ -20,10 +19,7 @@ export default function Details({ user }) {
       borderRadius="lg"
       overflow="hidden"
     >
-      <Image
-        src={user.avatar_url}
-        alt={user.login}
-      />
+      <Image src={user.avatar_url} alt={user.login} />
 
       <Box p="6">
         <Box
@@ -36,9 +32,7 @@ export default function Details({ user }) {
           {user.name}
         </Box>
 
-        <Box>
-          {`@${user.login}`}
-        </Box>
+        <Box>{`@${user.login}`}</Box>
 
         <Box d="flex" mt="2" alignItems="center">
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
@@ -50,5 +44,5 @@ export default function Details({ user }) {
         </Box>
       </Box>
     </Box>
-  )
-};
+  );
+}

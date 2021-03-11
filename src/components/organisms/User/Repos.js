@@ -9,7 +9,7 @@ import {
   Th,
   Td,
   TableCaption,
-  Text
+  Text,
 } from '@chakra-ui/react';
 
 export default function Repos({ repos }) {
@@ -23,20 +23,16 @@ export default function Repos({ repos }) {
         </Tr>
       </Thead>
       <Tbody>
-        { repos.map(repo => (
+        {repos.map((repo) => (
           <Tr key={repo.id}>
             <Td>
-              <Text
-                cursor="pointer"
-                onClick={() => alert('asdasd')}
-              >
+              <Text cursor="pointer" onClick={() => alert('asdasd')}>
                 {repo.name}
               </Text>
             </Td>
             <Td>{repo.forks}</Td>
           </Tr>
-          ))
-        }
+        ))}
       </Tbody>
       <Tfoot>
         <Tr>
@@ -46,4 +42,4 @@ export default function Repos({ repos }) {
       </Tfoot>
     </Table>
   );
-};
+}

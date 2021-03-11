@@ -6,7 +6,7 @@ import {
   theme,
   Heading,
   Flex,
-  Spacer
+  Spacer,
 } from '@chakra-ui/react';
 import UserList from 'components/organisms/User/UserList';
 import Navbar from 'components/organisms/Layout/Navbar';
@@ -22,12 +22,12 @@ export default function Home() {
     action: github.getUsers,
     options: {
       page: page,
-      per_page: quantity
-    }
+      per_page: quantity,
+    },
   });
 
   // handler quantity
-  const handlerQuantity = v => setQuantity(v.target.value);
+  const handlerQuantity = (v) => setQuantity(v.target.value);
 
   return (
     <ChakraProvider theme={theme}>
@@ -46,7 +46,7 @@ export default function Home() {
             <Filter />
           </Box>
         </SimpleGrid> */}
-        
+
         <Grid minH="100vh" p={3}>
           <UserList users={response.data || []} />
         </Grid>

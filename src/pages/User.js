@@ -1,12 +1,6 @@
 import React from 'react';
 // import { useParams } from 'react-router-dom';
-import {
-  ChakraProvider,
-  Box,
-  Grid,
-  theme,
-  GridItem
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, Grid, theme, GridItem } from '@chakra-ui/react';
 import Navbar from 'components/organisms/Layout/Navbar';
 import Repos from 'components/organisms/User/Repos';
 import Details from 'components/organisms/User/Details';
@@ -19,13 +13,13 @@ export default function User() {
   const { username } = useParams();
   const userRequest = useRequest({
     action: github.getUser,
-    options: { username }
+    options: { username },
   });
   const reposRequest = useRequest({
     action: github.getUserRepositories,
-    options: { username }
+    options: { username },
   });
-  
+
   return (
     <ChakraProvider theme={theme}>
       <Navbar title="test" />
@@ -52,11 +46,11 @@ export default function User() {
             colSpan={4}
             // maxH="100vh"
           >
-           {/* / <Filter /\\> */}
+            {/* / <Filter /\\> */}
             <Repos repos={reposRequest.response.data || []} />
           </GridItem>
         </Grid>
       </Box>
     </ChakraProvider>
   );
-};
+}

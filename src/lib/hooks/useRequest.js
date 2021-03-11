@@ -7,8 +7,7 @@ export const useRequest = ({ action, options }) => {
   const [response, setResponse] = useState({});
 
   // handler error
-  const toggleError = error => setError(error);
-
+  const toggleError = (error) => setError(error);
 
   useEffect(() => {
     const fetch = async () => {
@@ -27,10 +26,10 @@ export const useRequest = ({ action, options }) => {
           stopLoading: () => setLoading(false),
         }
       );
-    }
+    };
 
     fetch();
-  }, [ options.per_page ]);
+  }, [options.per_page]);
 
   return { isLoading, error, response };
-}
+};
