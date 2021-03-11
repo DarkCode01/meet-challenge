@@ -8,14 +8,16 @@ import {
   Tr,
   Th,
   Td,
-  TableCaption,
   Image,
+  SkeletonCircle,
+  SkeletonText
 } from '@chakra-ui/react';
 
-export default function UserList({ users }) {
+export default function UserList({ isLoading, users }) {
+  const data = !isLoading ? users : [{}, {}, {}, {}];
+
   return (
     <Table variant="simple">
-      <TableCaption>Imperial to metric conversion factors</TableCaption>
       <Thead>
         <Tr>
           <Th>Avatar</Th>
@@ -23,19 +25,23 @@ export default function UserList({ users }) {
         </Tr>
       </Thead>
       <Tbody>
-        {users.map((user) => (
-          <Tr key={user.login}>
+        {data.map((user, index) => (
+          <Tr key={`user-${index}`}>
             <Td>
-              <Image
-                borderRadius="full"
-                boxSize="150px"
-                src={user.avatar_url}
-                alt={user.login}
-                fallbackSrc="https://via.placeholder.com/150"
-              />
+              <SkeletonCircle isLoaded={!isLoading} boxSize="150px">
+                <Image
+                  borderRadius="full"
+                  boxSize="150px"
+                  src={user.avatar_url}
+                  alt={user.login}
+                  fallbackSrc="https://via.placeholder.com/150"
+                />
+              </SkeletonCircle>
             </Td>
             <Td>
-              <Link to={`/${user.login}`}>{user.login}</Link>
+              <SkeletonText isLoaded={!isLoading}>
+                <Link to={`/${user.login}`}>{user.login}</Link>
+              </SkeletonText>
             </Td>
           </Tr>
         ))}

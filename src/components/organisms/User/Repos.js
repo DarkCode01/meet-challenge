@@ -9,16 +9,17 @@ import {
   Td,
   TableCaption,
   Text,
-  useDisclosure
+  useDisclosure,
+  Skeleton
 } from '@chakra-ui/react';
 import RepoDetails from 'components/organisms/User/RepoDetails';
 
-export default function Repos({ repos }) {
+export default function Repos({ isLoading, repos }) {
   const { isOpen, onClose, onOpen} = useDisclosure();
   const [selected, setSelected] = useState({});
+  const data = !isLoading ? repos : [{}, {}, {}, {}];
 
   const select = (repo) => () => {
-    console.log(repo)
     setSelected(repo);
     onOpen();
   }
@@ -41,14 +42,20 @@ export default function Repos({ repos }) {
         </Tr>
       </Thead>
       <Tbody>
-        {repos.map((repo) => (
-          <Tr key={repo.id}>
+        {data.map((repo, index) => (
+          <Tr key={`repo-user-${index}`}>
             <Td>
-              <Text cursor="pointer" onClick={select(repo)}>
-                {repo.name}
-              </Text>
+              <Skeleton isLoaded={!isLoading}>
+                <Text cursor="pointer" onClick={select(repo)}>
+                  {repo.name}
+                </Text>
+              </Skeleton>
             </Td>
-            <Td>{repo.forks}</Td>
+            <Td>
+              <Skeleton isLoaded={!isLoading}>
+                {repo.forks}
+              </Skeleton>
+            </Td>
           </Tr>
         ))}
       </Tbody>

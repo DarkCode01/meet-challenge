@@ -4,7 +4,7 @@ import request from 'lib/utils/request';
 export const useRequest = ({ action, options }) => {
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [response, setResponse] = useState({});
+  const [data, setData] = useState(options.defaultData || {});
 
   // handler error
   const toggleError = (error) => setError(error);
@@ -16,7 +16,7 @@ export const useRequest = ({ action, options }) => {
           try {
             const response = await action(options);
 
-            setResponse(response);
+            setData(response.data);
           } catch (err) {
             toggleError(err.response?.data?.message || 'Error interno!.');
           }
@@ -31,5 +31,5 @@ export const useRequest = ({ action, options }) => {
     fetch();
   }, [options.per_page]);
 
-  return { isLoading, error, response };
+  return { isLoading, error, data, toggleError };
 };
