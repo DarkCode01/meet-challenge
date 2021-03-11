@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   Box,
   FormControl,
@@ -8,7 +9,7 @@ import {
   Input
 } from '@chakra-ui/react';
 
-export default function Filter({ onSearch, onQuantity, onOrder }) {
+function Filter({ onSearch, onQuantity, onOrder }) {
   return (
     <Box
       padding="5px"
@@ -43,3 +44,11 @@ export default function Filter({ onSearch, onQuantity, onOrder }) {
     </Box>
   );
 }
+
+Filter.propTypes = {
+  onSearch: propTypes.func.isRequired,
+  onQuantity: propTypes.func.isRequired,
+  onOrder: propTypes.func.isRequired,
+}
+
+export default Filter;

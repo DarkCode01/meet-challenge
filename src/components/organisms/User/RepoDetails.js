@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   Link,
   Button,
@@ -12,7 +13,7 @@ import {
   Badge
 } from "@chakra-ui/react"
 
-export default function RepoDetails({ repo, isOpen, onClose}) {
+function RepoDetails({ repo, isOpen, onClose}) {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
@@ -39,3 +40,15 @@ export default function RepoDetails({ repo, isOpen, onClose}) {
     </Modal>
   );
 };
+
+RepoDetails.propTypes = {
+  isOpen: propTypes.bool.isRequired,
+  repo: propTypes.objectOf({
+    description: propTypes.string,
+    name: propTypes.string,
+    language: propTypes.string
+  }),
+  onClose: propTypes.func.isRequired
+}
+
+export default RepoDetails;

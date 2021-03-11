@@ -1,11 +1,12 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   Image,
   Box,
   Skeleton,
 } from '@chakra-ui/react';
 
-export default function Details({ isLoading, user }) {
+function Details({ isLoading, user }) {
   return (
     <Box
       borderWidth="1px"
@@ -51,3 +52,16 @@ export default function Details({ isLoading, user }) {
     </Box>
   );
 }
+
+Details.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  user: propTypes.objectOf({
+    avatar_url: propTypes.string,
+    login: propTypes.string,
+    name: propTypes.string,
+    followers: propTypes.number,
+    following: propTypes.number
+  })
+}
+
+export default Details;

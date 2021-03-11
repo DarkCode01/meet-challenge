@@ -1,10 +1,11 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from 'components/organisms/UI/ColorModeSwitcher';
 import { Button, Box, Text, Stack, CloseButton } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 
-export const MenuToggle = ({ toggle, isOpen }) => {
+const MenuToggle = ({ toggle, isOpen }) => {
   return (
     <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
       {!isOpen
@@ -17,6 +18,11 @@ export const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
+MenuToggle.propTypes = {
+  toggle: propTypes.func.isRequired,
+  isOpen: propTypes.bool.isRequired
+}
+
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   return (
     <Link to={to}>
@@ -27,7 +33,7 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   );
 };
 
-export const Menu = ({ isOpen }) => {
+const Menu = ({ isOpen }) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -47,3 +53,10 @@ export const Menu = ({ isOpen }) => {
     </Box>
   );
 };
+
+Menu.propTypes = {
+  isOpen: propTypes.bool.isRequired
+}
+
+
+export { MenuItem, Menu, MenuToggle  };

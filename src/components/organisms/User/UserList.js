@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import {
   Table,
@@ -12,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import Loading from 'components/organisms/UI/Loading';
 
-export default function UserList({ isLoading, users }) {
+function UserList({ isLoading, users }) {
   return (
     <Table variant="simple">
       <Thead>
@@ -51,3 +52,13 @@ export default function UserList({ isLoading, users }) {
     </Table>
   );
 }
+
+UserList.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  users: propTypes.arrayOf(propTypes.objectOf({
+    avatar_url: propTypes.string,
+    login: propTypes.string,
+  }))
+}
+
+export default UserList;

@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   Alert,
   AlertIcon,
@@ -8,7 +9,7 @@ import {
   CloseButton
 } from "@chakra-ui/react"
 
-export default function ErrorNotificaiton({
+function ErrorNotificaiton({
   isOpen,
   description,
   onClose,
@@ -33,3 +34,11 @@ export default function ErrorNotificaiton({
     </ScaleFade>
   );
 };
+
+ErrorNotificaiton.propTypes = {
+  isOpen: propTypes.bool,
+  description: propTypes.string,
+  onClose: propTypes.func.isRequired
+}
+
+export default ErrorNotificaiton;

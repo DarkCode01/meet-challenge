@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import propTypes from 'prop-types';
 import {
   Table,
   Thead,
@@ -14,7 +15,7 @@ import {
 import RepoDetails from 'components/organisms/User/RepoDetails';
 import Loading from 'components/organisms/UI/Loading';
 
-export default function Repos({ isLoading, repos }) {
+function Repos({ isLoading, repos }) {
   const { isOpen, onClose, onOpen} = useDisclosure();
   const [selected, setSelected] = useState({});
 
@@ -63,3 +64,13 @@ export default function Repos({ isLoading, repos }) {
     </Table>
   );
 }
+
+Repos.propTypes = {
+  isLoading: propTypes.bool.isRequired,
+  repos: propTypes.arrayOf(propTypes.objectOf({
+    name: propTypes.string,
+    forks: propTypes.number
+  }))
+}
+
+export default Repos;

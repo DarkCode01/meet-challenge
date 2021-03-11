@@ -1,11 +1,12 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   ScaleFade,
   Center,
   Spinner
 } from '@chakra-ui/react';
 
-export default function Loading({ isLoading }) {
+function Loading({ isLoading }) {
   return (
     <ScaleFade
         id="error-notifiaciton"
@@ -25,3 +26,9 @@ export default function Loading({ isLoading }) {
       </ScaleFade>
   );
 };
+
+Loading.propTypes = {
+  isLoading: propTypes.bool.isRequired
+};
+
+export default Loading;
