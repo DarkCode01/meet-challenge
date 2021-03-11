@@ -6,24 +6,15 @@ import {
   Select,
   Flex,
   Spacer,
-  Input
+  Input,
 } from '@chakra-ui/react';
 
 function Filter({ onSearch, onQuantity, onOrder }) {
   return (
-    <Box
-      padding="5px"
-      borderRadius="lg"
-    >
+    <Box padding="5px" borderRadius="lg">
       <Flex>
-        <FormControl
-          flex="5"
-          id="first-name"
-        >
-          <Input
-            placeholder="Nombre del usuario"
-            onBlur={onSearch}
-          />
+        <FormControl flex="5" id="first-name">
+          <Input placeholder="Nombre del usuario" onBlur={onSearch} />
         </FormControl>
         <Spacer />
         <FormControl id="first-name" flex="3">
@@ -49,6 +40,6 @@ Filter.propTypes = {
   onSearch: propTypes.func.isRequired,
   onQuantity: propTypes.func.isRequired,
   onOrder: propTypes.func.isRequired,
-}
+};
 
 export default Filter;

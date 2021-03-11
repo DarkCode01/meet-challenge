@@ -46,7 +46,7 @@ function UserList({ isLoading, users }) {
           <Th>Username</Th>
         </Tr>
       </Tfoot>
-      
+
       {/* loading */}
       <Loading isLoading={isLoading} />
     </Table>
@@ -55,10 +55,12 @@ function UserList({ isLoading, users }) {
 
 UserList.propTypes = {
   isLoading: propTypes.bool.isRequired,
-  users: propTypes.arrayOf(propTypes.objectOf({
-    avatar_url: propTypes.string,
-    login: propTypes.string,
-  }))
-}
+  users: propTypes.arrayOf(
+    propTypes.objectOf({
+      avatar_url: propTypes.string,
+      login: propTypes.string,
+    })
+  ),
+};
 
 export default UserList;

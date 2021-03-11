@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import {
   Table,
@@ -16,23 +16,18 @@ import RepoDetails from 'components/organisms/User/RepoDetails';
 import Loading from 'components/organisms/UI/Loading';
 
 function Repos({ isLoading, repos }) {
-  const { isOpen, onClose, onOpen} = useDisclosure();
+  const { isOpen, onClose, onOpen } = useDisclosure();
   const [selected, setSelected] = useState({});
 
   const select = (repo) => () => {
     setSelected(repo);
     onOpen();
-  }
+  };
 
   return (
     <Table variant="simple">
-
       {/* Modal */}
-      <RepoDetails
-        repo={selected}
-        onClose={onClose}
-        isOpen={isOpen}
-      />
+      <RepoDetails repo={selected} onClose={onClose} isOpen={isOpen} />
 
       <TableCaption>Imperial to metric conversion factors</TableCaption>
       <Thead>
@@ -52,7 +47,7 @@ function Repos({ isLoading, repos }) {
             <Td>{repo.forks}</Td>
           </Tr>
         ))}
-        
+
         <Loading isLoading={isLoading} />
       </Tbody>
       <Tfoot>
@@ -67,10 +62,12 @@ function Repos({ isLoading, repos }) {
 
 Repos.propTypes = {
   isLoading: propTypes.bool.isRequired,
-  repos: propTypes.arrayOf(propTypes.objectOf({
-    name: propTypes.string,
-    forks: propTypes.number
-  }))
-}
+  repos: propTypes.arrayOf(
+    propTypes.objectOf({
+      name: propTypes.string,
+      forks: propTypes.number,
+    })
+  ),
+};
 
 export default Repos;

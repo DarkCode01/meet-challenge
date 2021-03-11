@@ -36,7 +36,7 @@ export default function Home() {
       q: search,
       page: page,
       per_page: quantity,
-      order: order
+      order: order,
     },
   });
 
@@ -51,14 +51,13 @@ export default function Home() {
   useEffect(() => {
     if (isBottom === true) {
       setConcat(true);
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
       setIsBottom(false);
     }
 
     // eslint-disable-next-line
   }, [isBottom]);
   return (
-
     <ChakraProvider theme={theme}>
       <Navbar title="Hub Clone" />
 
@@ -68,7 +67,7 @@ export default function Home() {
           description={error}
           onClose={() => toggleError(null)}
         />
-        
+
         <Flex padding={[0, 0, 50, 50]}>
           <Box>
             <Heading>Todos los usuarios</Heading>

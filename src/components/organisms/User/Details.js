@@ -1,18 +1,10 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import {
-  Image,
-  Box,
-  Skeleton,
-} from '@chakra-ui/react';
+import { Image, Box, Skeleton } from '@chakra-ui/react';
 
 function Details({ isLoading, user }) {
   return (
-    <Box
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-    >
+    <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Skeleton isLoaded={!isLoading}>
         <Image src={user.avatar_url} alt={user.login} />
       </Skeleton>
@@ -25,15 +17,11 @@ function Details({ isLoading, user }) {
           lineHeight="tight"
           isTruncated
         >
-          <Skeleton isLoaded={!isLoading}>
-            {user.name}
-          </Skeleton>
+          <Skeleton isLoaded={!isLoading}>{user.name}</Skeleton>
         </Box>
 
         <Box>
-          <Skeleton isLoaded={!isLoading}>
-            @{user.login}
-          </Skeleton>
+          <Skeleton isLoaded={!isLoading}>@{user.login}</Skeleton>
         </Box>
 
         <Box d="flex" mt="2" alignItems="center">
@@ -60,8 +48,8 @@ Details.propTypes = {
     login: propTypes.string,
     name: propTypes.string,
     followers: propTypes.number,
-    following: propTypes.number
-  })
-}
+    following: propTypes.number,
+  }),
+};
 
 export default Details;

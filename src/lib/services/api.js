@@ -19,7 +19,7 @@ export const github = {
   },
   getUserRepositories: async ({ page, username }) => {
     return await instance.get(`/users/${username}/repos`, {
-      params: { page }
+      params: { page },
     });
   },
 };

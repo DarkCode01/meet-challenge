@@ -35,7 +35,7 @@ export default function User() {
     options: {
       username,
       page,
-      defaultData: []
+      defaultData: [],
     },
   });
 
@@ -44,7 +44,7 @@ export default function User() {
   useEffect(() => {
     if (isBottom === true) {
       reposRequest.setConcat(true);
-      setPage(prev => prev + 1);
+      setPage((prev) => prev + 1);
       setIsBottom(false);
     }
 
@@ -72,7 +72,7 @@ export default function User() {
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink href="#">@{ username }</BreadcrumbLink>
+              <BreadcrumbLink href="#">@{username}</BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>
         </Box>
@@ -89,9 +89,7 @@ export default function User() {
               user={userRequest.data || {}}
             />
           </GridItem>
-          <GridItem
-            colSpan={4}
-          >
+          <GridItem colSpan={4}>
             <Repos
               isLoading={reposRequest.isLoading}
               repos={reposRequest.data || []}

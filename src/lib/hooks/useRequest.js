@@ -3,7 +3,7 @@ import request from 'lib/utils/request';
 
 /**
  * useRequest - hook to make request to api rest.
- * 
+ *
  * @param {function} action - request function.
  * @param {object} options - optiosn params and default value of request.
  */
@@ -24,14 +24,14 @@ export const useRequest = ({ action, options }) => {
             const response = await action(options);
 
             if (isConcat) {
-              setData(prev => {
+              setData((prev) => {
                 if (Array.isArray(response.data)) {
                   return prev.concat(response.data);
                 }
 
                 return {
-                  items: prev.items.concat(response.data.items)
-                }
+                  items: prev.items.concat(response.data.items),
+                };
               });
 
               setConcat(false);

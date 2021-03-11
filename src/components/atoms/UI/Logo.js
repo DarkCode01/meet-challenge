@@ -1,5 +1,5 @@
 import React from 'react';
-import propTypes from 'prop-types'
+import propTypes from 'prop-types';
 import { Box, Text } from '@chakra-ui/react';
 
 const Logo = ({ title }) => {
@@ -12,9 +12,8 @@ const Logo = ({ title }) => {
   );
 };
 
-
 Logo.propTypes = {
-  title: propTypes.string.isRequired
-}
+  title: propTypes.string.isRequired,
+};
 
 export { Logo };

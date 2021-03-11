@@ -8,20 +8,21 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 const MenuToggle = ({ toggle, isOpen }) => {
   return (
     <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
-      {!isOpen
-        ? <Button>
-            <HamburgerIcon />
-          </Button>
-        : <CloseButton /> 
-      }
+      {!isOpen ? (
+        <Button>
+          <HamburgerIcon />
+        </Button>
+      ) : (
+        <CloseButton />
+      )}
     </Box>
   );
 };
 
 MenuToggle.propTypes = {
   toggle: propTypes.func.isRequired,
-  isOpen: propTypes.bool.isRequired
-}
+  isOpen: propTypes.bool.isRequired,
+};
 
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   return (
@@ -55,8 +56,7 @@ const Menu = ({ isOpen }) => {
 };
 
 Menu.propTypes = {
-  isOpen: propTypes.bool.isRequired
-}
+  isOpen: propTypes.bool.isRequired,
+};
 
-
-export { MenuItem, Menu, MenuToggle  };
+export { MenuItem, Menu, MenuToggle };

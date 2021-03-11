@@ -6,24 +6,18 @@ import {
   AlertTitle,
   AlertDescription,
   ScaleFade,
-  CloseButton
-} from "@chakra-ui/react"
+  CloseButton,
+} from '@chakra-ui/react';
 
-function ErrorNotificaiton({
-  isOpen,
-  description,
-  onClose,
-}) {
+function ErrorNotificaiton({ isOpen, description, onClose }) {
   return (
-    <ScaleFade
-      id="error-notifiaciton"
-      in={isOpen}
-      unmountOnExit={true}
-    >
+    <ScaleFade id="error-notifiaciton" in={isOpen} unmountOnExit={true}>
       <Alert status="error">
         <AlertIcon />
-        <AlertTitle mr={2}>Error al intentar obtener la inforamción: </AlertTitle>
-        <AlertDescription>{ description }</AlertDescription>
+        <AlertTitle mr={2}>
+          Error al intentar obtener la inforamción:{' '}
+        </AlertTitle>
+        <AlertDescription>{description}</AlertDescription>
         <CloseButton
           position="absolute"
           right="8px"
@@ -33,12 +27,12 @@ function ErrorNotificaiton({
       </Alert>
     </ScaleFade>
   );
-};
+}
 
 ErrorNotificaiton.propTypes = {
   isOpen: propTypes.bool,
   description: propTypes.string,
-  onClose: propTypes.func.isRequired
-}
+  onClose: propTypes.func.isRequired,
+};
 
 export default ErrorNotificaiton;

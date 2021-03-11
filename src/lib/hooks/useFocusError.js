@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 /**
  * useFocusError - Simple hook to auto scroll the
  * alert when raise a new error on request.
- * 
+ *
  * @param {string} id - alert element id
- * @param {Array[string]} init - list values for auto focus 
+ * @param {Array[string]} init - list values for auto focus
  */
 export const useFocusError = (id, init = []) => {
   useEffect(() => {
