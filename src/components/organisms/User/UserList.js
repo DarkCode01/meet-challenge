@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   Table,
-  Spinner,
   Thead,
   Tbody,
   Tfoot,
@@ -10,9 +9,8 @@ import {
   Th,
   Td,
   Image,
-  ScaleFade,
-  Center
 } from '@chakra-ui/react';
+import Loading from 'components/organisms/UI/Loading';
 
 export default function UserList({ isLoading, users }) {
   return (
@@ -47,22 +45,9 @@ export default function UserList({ isLoading, users }) {
           <Th>Username</Th>
         </Tr>
       </Tfoot>
-      <ScaleFade
-          id="error-notifiaciton"
-          in={isLoading}
-          unmountOnExit={true}
-        >
-          <Center>
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
-            Cargando....
-          </Center>
-        </ScaleFade>
+      
+      {/* loading */}
+      <Loading isLoading={isLoading} />
     </Table>
   );
 }

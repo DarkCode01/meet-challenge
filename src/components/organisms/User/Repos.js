@@ -3,7 +3,6 @@ import {
   Table,
   Thead,
   Tbody,
-  Center,
   Tfoot,
   Tr,
   Th,
@@ -11,10 +10,9 @@ import {
   TableCaption,
   Text,
   useDisclosure,
-  Spinner,
-  ScaleFade
 } from '@chakra-ui/react';
 import RepoDetails from 'components/organisms/User/RepoDetails';
+import Loading from 'components/organisms/UI/Loading';
 
 export default function Repos({ isLoading, repos }) {
   const { isOpen, onClose, onOpen} = useDisclosure();
@@ -53,22 +51,8 @@ export default function Repos({ isLoading, repos }) {
             <Td>{repo.forks}</Td>
           </Tr>
         ))}
-        <ScaleFade
-          id="error-notifiaciton"
-          in={isLoading}
-          unmountOnExit={true}
-        >
-          <Center>
-            <Spinner
-              thickness="4px"
-              speed="0.65s"
-              emptyColor="gray.200"
-              color="blue.500"
-              size="xl"
-            />
-            Cargando...
-          </Center>
-        </ScaleFade>
+        
+        <Loading isLoading={isLoading} />
       </Tbody>
       <Tfoot>
         <Tr>

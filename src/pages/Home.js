@@ -26,6 +26,9 @@ export default function Home() {
   const [page, setPage] = useState(params.page || 1);
   const [quantity, setQuantity] = useState(params.per_page || 100);
 
+  // hook for infinity scroll
+  const { isBottom, setIsBottom } = useIfinityScroll();
+
   // request
   const { isLoading, data, error, toggleError, setConcat } = useRequest({
     action: github.getUsers,
@@ -41,13 +44,9 @@ export default function Home() {
   const handlerSearch = (v) => setSearch(v.target.value);
   const handlerQuantity = (v) => setQuantity(v.target.value);
   const handlerOrder = (v) => setOrder(v.target.value);
-  // const nextPage = () => setPage(p => p + 1);
-  // const prevPage = () => setPage(p => p - 1);
 
   // auto focus on error
   useFocusError('error-notifiaciton', [error]);
-
-  const { isBottom, setIsBottom } = useIfinityScroll();
 
   useEffect(() => {
     if (isBottom === true) {
@@ -55,11 +54,13 @@ export default function Home() {
       setPage(prev => prev + 1);
       setIsBottom(false);
     }
+
+    // eslint-disable-next-line
   }, [isBottom]);
   return (
 
     <ChakraProvider theme={theme}>
-      <Navbar title="test" />
+      <Navbar title="Hub Clone" />
 
       <Box textAlign="center" fontSize="xl">
         <ErrorNotificaiton

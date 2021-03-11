@@ -1,3 +1,9 @@
+/**
+ * request - function to manage loadings
+ *
+ * @param {function} callback - request function
+ * @param {object} options - functions to stop and start laoding
+ */
 export default async function request(
   callback,
   options = {

@@ -1,12 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ColorModeSwitcher } from 'ColorModeSwitcher';
-import { Box, Text, Stack } from '@chakra-ui/react';
+import { ColorModeSwitcher } from 'components/organisms/UI/ColorModeSwitcher';
+import { Button, Box, Text, Stack, CloseButton } from '@chakra-ui/react';
+import { HamburgerIcon } from '@chakra-ui/icons';
 
 export const MenuToggle = ({ toggle, isOpen }) => {
   return (
     <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
-      {isOpen ? '0' : 'x'}
+      {!isOpen
+        ? <Button>
+            <HamburgerIcon />
+          </Button>
+        : <CloseButton /> 
+      }
     </Box>
   );
 };

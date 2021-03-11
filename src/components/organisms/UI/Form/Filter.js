@@ -11,10 +11,8 @@ import {
 export default function Filter({ onSearch, onQuantity, onOrder }) {
   return (
     <Box
-      // borderWidth=/"1px"
       padding="5px"
       borderRadius="lg"
-      // overflow="hidden"
     >
       <Flex>
         <FormControl

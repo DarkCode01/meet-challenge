@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useParams } from 'react-router-dom';
 import {
   ChakraProvider,
   Box,
@@ -24,6 +23,9 @@ import { useIfinityScroll } from 'lib/hooks/useInfinityScroll';
 export default function User() {
   const { username } = useParams();
   const [page, setPage] = useState(1);
+
+  // rquest and hooks
+  const { isBottom, setIsBottom } = useIfinityScroll();
   const userRequest = useRequest({
     action: github.getUser,
     options: { username },
@@ -39,19 +41,19 @@ export default function User() {
 
   useFocusError('error-notifiaciton', [userRequest.error, reposRequest.error]);
 
-  const { isBottom, setIsBottom } = useIfinityScroll();
-
   useEffect(() => {
     if (isBottom === true) {
       reposRequest.setConcat(true);
       setPage(prev => prev + 1);
       setIsBottom(false);
     }
+
+    // eslint-disable-next-line
   }, [isBottom]);
 
   return (
     <ChakraProvider theme={theme}>
-      <Navbar title="test" />
+      <Navbar title="Hub Clone" />
 
       <ErrorNotificaiton
         isOpen={userRequest.error || reposRequest.error}
@@ -79,7 +81,6 @@ export default function User() {
           templateRows="repeat(2, 1fr)"
           templateColumns="repeat(5, 1fr)"
           gap={4}
-          // minH="100vh"
           p={3}
         >
           <GridItem colSpan={1} rowSpan={2}>
@@ -88,17 +89,9 @@ export default function User() {
               user={userRequest.data || {}}
             />
           </GridItem>
-          {/* <GridItem
-            colSpan={4}
-            // maxH="100vh"
-          >
-            <Filter />
-          </GridItem> */}
           <GridItem
             colSpan={4}
-            // maxH="100vh"
           >
-            {/* / <Filter /\\> */}
             <Repos
               isLoading={reposRequest.isLoading}
               repos={reposRequest.data || []}

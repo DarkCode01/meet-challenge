@@ -4,12 +4,10 @@ import {
   Box,
   Skeleton,
 } from '@chakra-ui/react';
-// import { StarIcon } from '@chakra-ui/icons';
 
 export default function Details({ isLoading, user }) {
   return (
     <Box
-      // maxW="sm"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
