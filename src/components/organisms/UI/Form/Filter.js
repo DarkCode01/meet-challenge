@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  Box,
-  FormControl,
-  Select
-} from '@chakra-ui/react';
+import { Box, FormControl, Select } from '@chakra-ui/react';
 
-export default function Filter() {
+export default function Filter({ handleChange }) {
   return (
     <Box
       // borderWidth=/"1px"
@@ -14,15 +10,12 @@ export default function Filter() {
       // overflow="hidden"
     >
       <FormControl id="first-name">
-        <Select
-          placeholder="Organizar por"
-          defaultValue="option1"
-        >
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
+        <Select placeholder="Cantidad" onChange={handleChange}>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
         </Select>
       </FormControl>
     </Box>
   );
-};
+}

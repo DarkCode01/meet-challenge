@@ -7,7 +7,7 @@ export default function Navbar(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   // handle
-  const handleToggle = () => setIsOpen(p => !p);
+  const handleToggle = () => setIsOpen((p) => !p);
 
   return (
     <Flex

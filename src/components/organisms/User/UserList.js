@@ -9,72 +9,43 @@ import {
   Th,
   Td,
   TableCaption,
-  // Image
+  Image,
 } from '@chakra-ui/react';
 
-export default function UserList() {
+export default function UserList({ users }) {
   return (
     <Table variant="simple">
       <TableCaption>Imperial to metric conversion factors</TableCaption>
       <Thead>
         <Tr>
-          <Th>To convert</Th>
-          <Th>into</Th>
-          <Th isNumeric>multiply by</Th>
+          <Th>Avatar</Th>
+          <Th>Username</Th>
         </Tr>
       </Thead>
       <Tbody>
-        <Tr>
-          <Td>
-            <Link to="/user/ddasdasd">adasdasdasd</Link>
-          </Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
-        
-        <Tr>
-          <Td>other</Td>
-          <Td>millimetres (mm)</Td>
-          <Td isNumeric>25.4</Td>
-        </Tr>
+        {users.map((user) => (
+          <Tr key={user.login}>
+            <Td>
+              <Image
+                borderRadius="full"
+                boxSize="150px"
+                src={user.avatar_url}
+                alt={user.login}
+                fallbackSrc="https://via.placeholder.com/150"
+              />
+            </Td>
+            <Td>
+              <Link to={`/${user.login}`}>{user.login}</Link>
+            </Td>
+          </Tr>
+        ))}
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th>To convert</Th>
-          <Th>into</Th>
-          <Th isNumeric>multiply by</Th>
+          <Th>Avatar</Th>
+          <Th>Username</Th>
         </Tr>
       </Tfoot>
     </Table>
   );
-};
+}

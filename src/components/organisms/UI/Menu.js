@@ -1,24 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ColorModeSwitcher } from 'ColorModeSwitcher';
-import {
-  Box,
-  Text,
-  Stack,
-  Button,
-  FormControl,
-  Input
-} from '@chakra-ui/react';
- 
+import { Box, Text, Stack, Button, FormControl, Input } from '@chakra-ui/react';
+
 export const MenuToggle = ({ toggle, isOpen }) => {
   return (
-    <Box display={{ base: "block", md: "none" }} onClick={toggle}>
-      {isOpen ?  '0' : 'x'}
+    <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
+      {isOpen ? '0' : 'x'}
     </Box>
-  )
+  );
 };
 
-const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
+const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   return (
     <Link to={to}>
       <Text display="block" {...rest}>
@@ -28,17 +21,17 @@ const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
   );
 };
 
-export const Menu =({ isOpen }) => {
+export const Menu = ({ isOpen }) => {
   return (
     <Box
-      display={{ base: isOpen ? "block" : "none", md: "block" }}
-      flexBasis={{ base: "100%", md: "auto" }}
+      display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
+      flexBasis={{ base: '100%', md: 'auto' }}
     >
       <Stack
         spacing={8}
         align="center"
-        justify={["center", "space-between", "flex-end", "flex-end"]}
-        direction={["column", "row", "row", "row"]}
+        justify={['center', 'space-between', 'flex-end', 'flex-end']}
+        direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
         <FormControl id="first-name" isRequired>
@@ -63,4 +56,4 @@ export const Menu =({ isOpen }) => {
       </Stack>
     </Box>
   );
-}
+};
