@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ChakraProvider,
   Box,
@@ -12,7 +12,23 @@ import UserList from 'components/organisms/User/UserList';
 import Navbar from 'components/organisms/Layout/Navbar';
 import Filter from 'components/organisms/UI/Form/Filter';
 
-function Home() {
+import { github } from 'lib/services/api';
+import { useRequest } from 'lib/hooks/useRequest';
+
+export default function Home() {
+  const [page, setPage] = useState(1);
+  const [quantity, setQuantity] = useState(100);
+  const { isLoading, response, error } = useRequest({
+    action: github.getUsers,
+    options: {
+      page: page,
+      per_page: quantity
+    }
+  });
+
+  // handler quantity
+  const handlerQuantity = v => setQuantity(v.target.value);
+
   return (
     <ChakraProvider theme={theme}>
       <Navbar title="test" />
@@ -22,7 +38,7 @@ function Home() {
             <Heading>Todos los usuarios</Heading>
           </Box>
           <Spacer />
-          <Filter />
+          <Filter handleChange={handlerQuantity} />
         </Flex>
         {/* <SimpleGrid columns={2}>
           
@@ -32,11 +48,9 @@ function Home() {
         </SimpleGrid> */}
         
         <Grid minH="100vh" p={3}>
-          <UserList />
+          <UserList users={response.data || []} />
         </Grid>
       </Box>
     </ChakraProvider>
   );
 }
-
-export default Home;
