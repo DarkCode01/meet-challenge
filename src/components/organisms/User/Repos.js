@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
 import {
   Table,
   Thead,
@@ -10,11 +9,30 @@ import {
   Td,
   TableCaption,
   Text,
+  useDisclosure
 } from '@chakra-ui/react';
+import RepoDetails from 'components/organisms/User/RepoDetails';
 
 export default function Repos({ repos }) {
+  const { isOpen, onClose, onOpen} = useDisclosure();
+  const [selected, setSelected] = useState({});
+
+  const select = (repo) => () => {
+    console.log(repo)
+    setSelected(repo);
+    onOpen();
+  }
+
   return (
     <Table variant="simple">
+
+      {/* Modal */}
+      <RepoDetails
+        repo={selected}
+        onClose={onClose}
+        isOpen={isOpen}
+      />
+
       <TableCaption>Imperial to metric conversion factors</TableCaption>
       <Thead>
         <Tr>
@@ -26,7 +44,7 @@ export default function Repos({ repos }) {
         {repos.map((repo) => (
           <Tr key={repo.id}>
             <Td>
-              <Text cursor="pointer" onClick={() => alert('asdasd')}>
+              <Text cursor="pointer" onClick={select(repo)}>
                 {repo.name}
               </Text>
             </Td>
